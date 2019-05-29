@@ -14,9 +14,6 @@ public class Demande {
 	private boolean archived;
 	private Date date_depot;
 	private Date date_fin;
-	private ArrayList<DocumentDemande> documents_deposes;
-	private ArrayList<EtapeDemande> etapes;
-	
 	
 	public int getId() {
 		return id;
@@ -67,17 +64,14 @@ public class Demande {
 		this.date_fin = date_fin;
 	}
 	public ArrayList<DocumentDemande> getDocuments_deposes() {
-		return documents_deposes;
+		return DocumentDemandeManager.getAllOfDemande(this);
 	}
-	public void setDocuments_deposes(ArrayList<DocumentDemande> documents_deposes) {
-		this.documents_deposes = documents_deposes;
-	}
+
 	public ArrayList<EtapeDemande> getEtapes() {
-		return etapes;
+		return EtapeDemandeManager.getAllOfDemande(this);
 	}
-	public void setEtapes(ArrayList<EtapeDemande> etapes) {
-		this.etapes = etapes;
+
+	public EtapeDemande getEtapeActuelle() {
+		return getEtapes().stream().filter(et -> et.isActuelle() == true).findFirst().get();
 	}
-	
-	
 }

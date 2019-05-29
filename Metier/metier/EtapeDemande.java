@@ -12,7 +12,7 @@ public class EtapeDemande {
 	private EtatEtape etat;
 	private Date date_traitement;
 	private String rapport;
-	
+	private boolean actuelle;
 	
 	public int getId() {
 		return id;
@@ -55,6 +55,12 @@ public class EtapeDemande {
 	}
 	public void setRapport(String rapport) {
 		this.rapport = rapport;
+	}
+	public boolean isActuelle() {
+		return actuelle;
+	}
+	public void setActuelle(boolean actuelle) {
+		this.actuelle = actuelle;
 	}
 	
 	
