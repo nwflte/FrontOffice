@@ -37,7 +37,7 @@ public class DemandeManager {
 			ArrayList<EtapeDemande> etapesDeType = EtapeDemandeManager.getAllOfEtapeType(etape);
 			for(EtapeDemande ed : etapesDeType) {
 				for(Demande d : listToFilter) {
-					if(ed.getDemande().getId() == d.getId())
+					if(ed.isActuelle() && ed.getDemande().getId() == d.getId())
 						liste.add(d);
 				}
 			}

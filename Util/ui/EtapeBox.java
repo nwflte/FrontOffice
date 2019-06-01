@@ -33,10 +33,10 @@ public class EtapeBox extends JLabel{
 			case MISEAJOUR :
 				docIcon = new ImageIcon("images/etapemiseajour.png");
 				break;
-			case REFUSE :
+			case REFUSEE :
 				docIcon = new ImageIcon("images/etapeattente.png");
 				break;
-			case REJETE :
+			case REJETEE :
 				docIcon = new ImageIcon("images/etapeattente.png");
 				break;
 			default :

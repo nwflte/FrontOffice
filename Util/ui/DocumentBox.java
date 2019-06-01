@@ -35,13 +35,13 @@ public class DocumentBox extends JLabel{
 				docIcon = new ImageIcon("images/pdf.png");
 				break;
 			case WORD :
-				docIcon = new ImageIcon("pdf.png");
+				docIcon = new ImageIcon("images/word.png");
 				break;
 			case IMAGE :
-				docIcon = new ImageIcon("pdf.png");
+				docIcon = new ImageIcon("images/image.png");
 				break;
 			default :
-				docIcon = new ImageIcon("pdf.png");
+				docIcon = new ImageIcon("images/autre.png");
 				break;
 		}
 		Image image = docIcon.getImage(); // transform it 
@@ -54,4 +54,10 @@ public class DocumentBox extends JLabel{
 		 Border border = LineBorder.createGrayLineBorder();
 		 super.setBorder(border);
 	}
+
+	public DocumentDemande getDocument() {
+		return document;
+	}
+	
+	
 }

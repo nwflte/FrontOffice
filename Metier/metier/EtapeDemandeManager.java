@@ -48,6 +48,28 @@ public class EtapeDemandeManager {
 	
 	public static boolean update(EtapeDemande etape) {
 		if(!isValid(etape)) return false;
+		if(etape.getEtat() == EtatEtape.REJETEE) {
+			etape.getDemande().setEtat(EtatDemande.REJETEE);
+		}
+		
+		if(etape.getEtat() == EtatEtape.REFUSEE ) {
+			etape.getDemande().getEtapes().get(etape.getOrdre()-2).setActuelle(true);
+			etape.getDemande().getEtapes().get(etape.getOrdre()-2).setEtat(EtatEtape.ATTENTE);
+			for(EtapeDemande e : etape.getDemande().getEtapes()) {
+				if(e.getOrdre() != etape.getOrdre()-1)
+					e.setActuelle(false);
+			}
+		}
+		
+		if(etape.getEtat() == EtatEtape.ACCEPTEE) {
+			etape.getDemande().getEtapes().get(etape.getOrdre()).setActuelle(true);
+			for(EtapeDemande e : etape.getDemande().getEtapes()) {
+				if(e.getOrdre() != etape.getOrdre()+1)
+					e.setActuelle(false);
+			}
+		}
+		
+		DemandeManager.update(etape.getDemande());
 		return EtapeDemandeDAO.update(etape);
 	}
 	

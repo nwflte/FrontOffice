@@ -7,14 +7,20 @@ import javax.swing.table.AbstractTableModel;
 
 import metier.Demande;
 
-public class DemandeEmployeTableModel extends AbstractTableModel {
+public class EspaceEmployeTableModel extends AbstractTableModel {
 	
 	private ArrayList<Demande> listeDemandes;
+	private Demande demandeATraiter;
+	private int indexDemandeATraiter;
+	
 	private String[] columnsName = {"Procedure", "CIN", "Date Depot", "Etape á traitée", "Taux de Completion", "#Documents Deposés/Documents Requis"};
 	private Class[] columnsClass = {String.class, String.class, Date.class, String.class, String.class, String.class};
 	
-	public DemandeEmployeTableModel(ArrayList<Demande> liste) {
+	public EspaceEmployeTableModel(ArrayList<Demande> liste) {
 		listeDemandes = liste;
+		indexDemandeATraiter = 0;
+		demandeATraiter = liste.get(indexDemandeATraiter);
+		
 	}
 	
 	@Override
@@ -49,4 +55,31 @@ public class DemandeEmployeTableModel extends AbstractTableModel {
 	public Class getColumnClass(int columnIndex) {
 		return this.columnsClass[columnIndex];
 	}
+
+	public Demande getDemandeATraiter() {
+		return demandeATraiter;
+	}
+
+	public void setDemandeATraiter(Demande demandeATraiter) {
+		this.demandeATraiter = demandeATraiter;
+	}
+
+	public int getIndexDemandeATraiter() {
+		return indexDemandeATraiter;
+	}
+
+	public void setIndexDemandeATraiter(int indexDemandeATraiter) {
+		this.indexDemandeATraiter = indexDemandeATraiter;
+	}
+
+	public ArrayList<Demande> getListeDemandes() {
+		return listeDemandes;
+	}
+
+	public void setListeDemandes(ArrayList<Demande> listeDemandes) {
+		this.listeDemandes = listeDemandes;
+	}
+	
+	
+	
 }

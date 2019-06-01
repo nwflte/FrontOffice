@@ -2,10 +2,10 @@ package presentation.model;
 
 import metier.Demande;
 
-public class TraiterDemandeEmployeModel {
+public class ConsulterDemandeEmployeModel {
 	private Demande demandeATraiter;
 	
-	public TraiterDemandeEmployeModel(Demande demande) {
+	public ConsulterDemandeEmployeModel(Demande demande) {
 		demandeATraiter = demande;
 	}
 

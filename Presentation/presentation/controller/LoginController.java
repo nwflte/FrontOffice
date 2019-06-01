@@ -2,11 +2,12 @@ package presentation.controller;
 
 import Business.Chef;
 import Business.Employe;
+import metier.BackOfficeData;
 
 public class LoginController {
-	static UserType user;
+	private static UserType user;
 	static Chef chef;
-	static Employe employe;
+	static Employe employe = BackOfficeData.getEmploye(1);
 	
 	public static void setEmployeConnected(Employe e) {
 		employe = e;

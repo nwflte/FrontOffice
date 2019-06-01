@@ -1,6 +1,7 @@
 package presentation.view;
 
 import java.awt.BorderLayout;
+import java.awt.Desktop;
 import java.awt.EventQueue;
 
 import javax.swing.ImageIcon;
@@ -15,6 +16,10 @@ import metier.Demande;
 import metier.DocumentDemande;
 import metier.EtapeDemande;
 import metier.EtapeDemandeManager;
+import presentation.controller.ConsulterDemandeEmployeController;
+import presentation.model.DetailsEtapeEmployeModel;
+import presentation.model.ConsulterDemandeEmployeModel;
+import presentation.model.TraiterEtapeEmployeModel;
 import ui.ArrowEtape;
 import ui.DocumentBox;
 import ui.DocumentType;
@@ -24,34 +29,26 @@ import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
 
-public class TraiterDemandeEmployeView extends JFrame {
+public class ConsulterDemandeEmployeView extends JFrame {
 
 	private JPanel contentPane;
 	private JPanel panelDoc;
 	private JPanel panelEtape;
-	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TraiterDemandeEmployeView frame = new TraiterDemandeEmployeView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	private ConsulterDemandeEmployeController controller;
 	/**
 	 * Create the frame.
 	 */
-	public TraiterDemandeEmployeView() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public ConsulterDemandeEmployeView(ConsulterDemandeEmployeController controller) {
+		super();
+		this.controller = controller;
+		
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 1225, 778);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -62,10 +59,6 @@ public class TraiterDemandeEmployeView extends JFrame {
 		panelDoc.setBounds(12, 13, 1183, 208);
 		contentPane.add(panelDoc);
 		panelDoc.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
-		//DocumentBox lblNewLabel = new DocumentBox(DocumentType.PDF, "Nom du doc");
-		//panelDoc.add(lblNewLabel);
-		
 		
 		panelEtape = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panelEtape.getLayout();
@@ -95,7 +88,12 @@ public class TraiterDemandeEmployeView extends JFrame {
 		db.addMouseListener(new MouseAdapter() {
 			@Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("Yay you clicked me");
+				try {
+					Desktop.getDesktop().open(new File(db.getDocument().getLien()));
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
             }
 		});
 	}
@@ -104,7 +102,14 @@ public class TraiterDemandeEmployeView extends JFrame {
 		eb.addMouseListener(new MouseAdapter() {
 			@Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("Yay you clicked me" + eb.getEtape().getEtapeType().getEtape_nom());
+				if(!eb.getEtape().isActuelle()) {
+					controller.setModelDetailsEtape(new DetailsEtapeEmployeModel(eb.getEtape()));
+	                controller.showDetailsEtape();
+				} else {
+					controller.setModelTraiterEtape(new TraiterEtapeEmployeModel(eb.getEtape()));
+					controller.showTraiterEtape();
+				}
+                
             }
 		});
 	}

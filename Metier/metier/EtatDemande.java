@@ -1,5 +1,5 @@
 package metier;
 
 public enum EtatDemande {
-	ENATTENTE, ACCEPTEE, TERMINEE, REJETEE
+	ATTENTE, ACCEPTEE, TERMINEE, REJETEE
 }
